@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card bg-white p-8 rounded-2xl border border-teal/20 max-w-md mx-auto mt-12">
+    <h2 class="text-3xl font-poppins text-teal mb-6 text-center">Upload Document</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-6">
+            <label class="block text-light-gray font-poppins mb-2">File (PDF, DOC, DOCX)</label>
+            <input type="file" name="file" class="w-full p-3 border border-light-gray rounded-lg focus:outline-none focus:border-teal transition-colors" required>
+        </div>
+        <button type="submit" class="btn-primary w-full bg-teal text-white p-3 rounded-lg font-poppins hover:bg-coral transition-colors">Upload</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card bg-white p-6 rounded-2xl border border-teal/20">
+    <h2 class="text-3xl font-poppins text-teal mb-6">Notary Dashboard</h2>
+    {% if documents %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="bg-teal text-white">
+                        <th class="p-4 rounded-tl-lg">Filename</th>
+                        <th class="p-4">User</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4 rounded-tr-lg">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in documents %}
+                    <tr class="table-row border-b border-light-gray/20">
+                        <td class="p-4">{{ doc.filename }}</td>
+                        <td class="p-4">{{ doc.user.username }}</td>
+                        <td class="p-4 capitalize">{{ doc.status }}</td>
+                        <td class="p-4 flex space-x-2">
+                            {% if doc.notary_id is none %}
+                                <a href="{{ url_for('notary.assign', document_id=doc.id) }}" class="bg-teal text-white px-4 py-2 rounded-lg hover:bg-coral transition-colors">Assign</a>
+                            {% elif doc.notary_id == current_user.id and doc.status == 'pending' %}
+                                <a href="{{ url_for('notary.approve', document_id=doc.id) }}" class="bg-gold text-white px-4 py-2 rounded-lg hover:bg-coral transition-colors">Approve</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-light-gray">No documents available.</p>
+    {% endif %}
+</div>
+{% endblock %}

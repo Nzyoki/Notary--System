@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card bg-white p-8 rounded-2xl border border-teal/20 max-w-md mx-auto mt-12">
+    <h2 class="text-3xl font-poppins text-teal mb-6 text-center">Edit Document</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-4">
+            <label class="block text-light-gray font-poppins mb-2">Filename</label>
+            <input type="text" name="filename" value="{{ document.filename }}" class="w-full p-3 border border-light-gray rounded-lg focus:outline-none focus:border-teal transition-colors" required>
+        </div>
+        <div class="mb-6">
+            <label class="block text-light-gray font-poppins mb-2">Replace File (Optional, PDF, DOC, DOCX)</label>
+            <input type="file" name="file" class="w-full p-3 border border-light-gray rounded-lg focus:outline-none focus:border-teal transition-colors">
+        </div>
+        <button type="submit" class="btn-primary w-full bg-teal text-white p-3 rounded-lg font-poppins hover:bg-coral transition-colors">Save Changes</button>
+        <a href="{{ url_for('document.dashboard') }}" class="block text-center bg-light-gray/20 text-charcoal p-3 rounded-lg mt-3 hover:bg-gold hover:text-white transition-colors">Cancel</a>
+    </form>
+</div>
+{% endblock %}
