@@ -71,13 +71,6 @@ Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 Flask-Login==0.6.2
 Werkzeug==2.3.7
-The app uses SQLite (`notary.db`) for data storage. Initialize the database by creating the necessary tables.
-python
->>> from app import create_app, db
->>> app = create_app()
->>> with app.app_context():
-...     db.create_all()
->>> exit()
 ```
 
 This creates `notary.db` in the project root.
