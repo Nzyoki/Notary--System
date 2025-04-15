@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Unassigned Documents</h2>
+    {% if documents %}
+        <table>
+            <tr>
+                <th>Filename</th>
+                <th>Uploaded By</th>
+                <th>Uploaded At</th>
+                <th>Action</th>
+            </tr>
+            {% for doc in documents %}
+                <tr>
+                    <td>{{ doc.filename }}</td>
+                    <td>{{ doc.owner.username }}</td>
+                    <td>{{ doc.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('notary.assign_document', doc_id=doc.id) }}">
+                            <button type="submit">Assign to Me</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No unassigned documents available.</p>
+    {% endif %}
+    <p><a href="{{ url_for('notary.dashboard') }}">Back to Dashboard</a></p>
+{% endblock %}

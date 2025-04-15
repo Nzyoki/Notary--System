@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Review Document: {{ document.filename }}</h2>
+    <p><strong>Status:</strong> {{ document.status | capitalize }}</p>
+    <p><strong>Uploaded By:</strong> {{ document.owner.username }}</p>
+    <p><strong>Uploaded At:</strong> {{ document.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    <p><a href="{{ url_for('uploaded_file', filename=document.filename) }}" target="_blank">View Document</a></p>
+    
+    {% if document.status == 'pending' %}
+        <form method="POST" action="{{ url_for('notary.update_status', doc_id=document.id) }}">
+            <label for="status">Update Status:</label>
+            <select name="status" id="status">
+                <option value="approved">Approve</option>
+                <option value="rejected">Reject</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+        <p>This document has already been {{ document.status }}.</p>
+    {% endif %}
+    
+    <p><a href="{{ url_for('notary.dashboard') }}">Back to Dashboard</a></p>
+{% endblock %}
